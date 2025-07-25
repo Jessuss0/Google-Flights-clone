@@ -23,19 +23,19 @@ const FlightSearchForm = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 space-y-4 bg-white shadow rounded">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Origen</label>
+    <form onSubmit={handleSubmit} className="flex h-[100px] w-[1500px] bg-white shadow rounded-full p-4 gap-10">
+      <div className="ml-16">
+        <label className="flex text-sm font-medium text-black mb-1">Origen</label>
         <AirportAutocomplete onSelectAirport={setOrigin} />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Destino</label>
+        <label className="flex text-sm font-medium text-black mb-1">Destino</label>
         <AirportAutocomplete onSelectAirport={setDestination} />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Fecha</label>
+        <label className="flex text-sm font-medium text-black mb-1">Fecha</label>
         <input
           type="date"
           className="w-full border p-2 rounded"
@@ -46,7 +46,7 @@ const FlightSearchForm = ({ onSearch }) => {
 
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
+        className="flex w-[300px] bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition text-center items-center justify-center ml-40"
       >
         Buscar vuelos
       </button>
