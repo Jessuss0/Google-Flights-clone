@@ -1,16 +1,13 @@
-"use client"
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 const AirportAutocomplete = ({ onSelectAirport }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  const skipNextFetch = useRef(false); // 🧠 esto evita la petición no deseada
 
-  const host = process.env.REACT_APP_RAPIDAPI_HOST;
-  const key = process.env.REACT_APP_RAPIDAPI_KEY;
-
-  console.log(host, key)
   const fetchSuggestions = async (input) => {
     if (!input) return;
     setLoading(true);
@@ -20,12 +17,11 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
         {
           params: { query: input },
           headers: {
-            "X-RapidAPI-Key": '51c434fef3msh27c8271147e6f64p1e232ajsn7d5b4295cd21',
-            "X-RapidAPI-Host": 'sky-scrapper.p.rapidapi.com',
+            'x-rapidapi-key': '53638e777amsh1a3e4590974a616p16247djsnbc3ac71109a7',
+            'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com',
           },
         }
       );
-      console.log(res.data);
       setSuggestions(res.data.data || []);
     } catch (err) {
       console.error("Error fetching airports:", err);
@@ -35,6 +31,11 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
   };
 
   useEffect(() => {
+    if (skipNextFetch.current) {
+      skipNextFetch.current = false;
+      return; // 🚫 salta esta ejecución
+    }
+
     const delayDebounce = setTimeout(() => {
       if (query.length >= 2) {
         fetchSuggestions(query);
@@ -47,7 +48,8 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
   }, [query]);
 
   const handleSelect = (airport) => {
-    setQuery(`${airport.name} (${airport.iata_code})`);
+    skipNextFetch.current = true; // ⛔ evitar que query dispare fetch
+    setQuery(`${airport?.navigation?.localizedName} (${airport?.entityId})`);
     setSuggestions([]);
     onSelectAirport(airport);
   };
@@ -56,7 +58,7 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
     <div className="relative w-full">
       <input
         type="text"
-        className="w-full border p-2 rounded"
+        className="w-full border p-2 rounded text-black"
         placeholder="Buscar aeropuerto"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -72,7 +74,8 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
               onClick={() => handleSelect(airport)}
               className="p-2 hover:bg-gray-100 cursor-pointer text-black"
             >
-              {airport.navigation.localizedName} ({airport.entityId}) – {airport?.presentation?.title}, {airport.presentation.subtitle}
+              {airport.navigation.localizedName} ({airport.entityId}) –{" "}
+              {airport.presentation.title}, {airport.presentation.subtitle}
             </li>
           ))}
         </ul>
