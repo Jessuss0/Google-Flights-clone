@@ -30,9 +30,34 @@ try {
 	console.error(error);
 }
 
-export const searchFlights = async ({ origin, destination, date }) => {
-  return axios.get(`https://${host}/searchFlights`, {
-    params: { origin, destination, date },
-    headers: { "x-rapidapi-key": key, "x-rapidapi-host": host }
-  }).then(res => res.data);
+export const fetchFlights = async ({ originSkyId, destinationSkyId, originEntityId, destinationEntityId, departDate }) => {
+  const options = {
+    method: 'GET',
+    url: 'https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlights',
+    params: {
+      originSkyId,
+      destinationSkyId,
+      originEntityId,
+      destinationEntityId,
+      cabinClass: 'economy',
+      adults: '1',
+      sortBy: 'best',
+      currency: 'USD',
+      market: 'en-US',
+      countryCode: 'US',
+      date: departDate
+    },
+    headers: {
+      'x-rapidapi-key': '53638e777amsh1a3e4590974a616p16247djsnbc3ac71109a7',
+      'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com',
+    }
+  };
+
+  try {
+    const response = await axios.request(options);
+    console.log("Resultado:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error en la búsqueda:", error.response?.data || error.message);
+  }
 };
