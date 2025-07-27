@@ -20,25 +20,32 @@ const FlightSearchForm = ({ onSearch }) => {
   "destinationEntityId:", destination?.entityId,
   "departDate:", date);
 
-//   await fetchFlights({originSkyId: origin?.skyId,
-//   destinationSkyId: destination?.skyId,
-//   originEntityId: origin?.entityId,
-//   destinationEntityId: destination?.entityId,
-//   departDate: date
-//   }).then((data) => {
-//       console.log("Vuelos encontrados:", data);})}
+  // await fetchFlights({originSkyId: origin?.skyId,
+  // destinationSkyId: destination?.skyId,
+  // originEntityId: origin?.entityId,
+  // destinationEntityId: destination?.entityId,
+  // departDate: date
+  // }).then((data) => {
+  //     console.log("Vuelos encontrados:", data);})}
 
-await fetchFlights({originSkyId: "LOND",
+onSearch({originSkyId: "LOND",
   destinationSkyId: "NYCA",
   originEntityId: "27544008",
   destinationEntityId: "27537542",
   departDate: "2025-08-01"
-  }).then((data) => {
-      console.log("Vuelos encontrados:", data);})
+  });
+
+// await fetchFlights({originSkyId: "LOND",
+//   destinationSkyId: "NYCA",
+//   originEntityId: "27544008",
+//   destinationEntityId: "27537542",
+//   departDate: "2025-08-01"
+//   }).then((data) => {
+//       console.log("Vuelos encontrados:", data);})
     }
 
   return (
-    <form onSubmit={handleSubmit} className="flex h-[100px] w-[1500px] bg-white shadow rounded-full p-4 gap-10">
+    <form onSubmit={handleSubmit} className="flex h-[100px] w-[1400px] bg-white shadow rounded-full p-4 gap-10">
       <div className="ml-16">
         <label className="flex text-sm font-medium text-black mb-1">Origen</label>
         <AirportAutocomplete onSelectAirport={setOrigin} />
@@ -50,7 +57,7 @@ await fetchFlights({originSkyId: "LOND",
       </div>
 
       <div>
-        <label className="flex text-sm font-medium text-black mb-1">Fecha</label>
+        <label className="flex text-sm font-medium text-black mb-1">Fecha de Salida</label>
         <input
           type="date"
           className="w-full border p-2 rounded"
