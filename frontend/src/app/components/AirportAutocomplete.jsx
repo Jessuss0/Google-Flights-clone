@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-const AirportAutocomplete = ({ onSelectAirport }) => {
+const AirportAutocomplete = ({ onSelectAirport, placeholder }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,8 +17,8 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
         {
           params: { query: input },
           headers: {
-            'x-rapidapi-key': '53638e777amsh1a3e4590974a616p16247djsnbc3ac71109a7',
-            'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com',
+            'x-rapidapi-key': 'ef85cbd4b5mshaac28f7d86fa3dep1efd0cjsnbab025636679',
+    'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com'
           },
         }
       );
@@ -59,7 +59,7 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
       <input
         type="text"
         className="w-full border p-2 rounded text-black"
-        placeholder="Buscar aeropuerto"
+        placeholder={placeholder || "Buscar aeropuerto"}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

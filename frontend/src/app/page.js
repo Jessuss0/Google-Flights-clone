@@ -3,26 +3,20 @@ import FlightSearchForm from "./components/SearchFligth";
 import FlightsPage from "./components/Flights";
 import { useState } from "react";
 import { fetchFlights } from "./services/api";
-import mockFlightsResponse from "./backupFlights";
 
 export default function Home() {
   const [flights, setFlights] = useState([]);
 
   const handleFlightSearch = async ({ originSkyId, destinationSkyId, originEntityId, destinationEntityId, departDate }) => {
-    console.log("Buscar vuelos:", originSkyId, destinationSkyId, originEntityId, destinationEntityId, departDate);
 
     const data = await fetchFlights({
       originSkyId, destinationSkyId, originEntityId, destinationEntityId, departDate
     });
-    console.log("Vuelos encontrados:", data);
-
-    // const data = mockFlightsResponse; // Usar datos de prueba
 
     const itineraries = data?.data?.itineraries || [];
 
     const vuelosFormateados = itineraries.map((item) => {
       const leg = item.legs?.[0] || {};
-      console.log(leg.carriers.marketing[0].name);
       return {
         precio: item.price?.raw || 0,
         moneda: "USD",
