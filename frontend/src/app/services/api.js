@@ -10,25 +10,25 @@ const key = process.env.REACT_APP_RAPIDAPI_KEY;
 //   }).then(res => res.data);
 // };
 
-export const searchAirport = {
-  method: 'GET',
-  url: 'https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport',
-  params: {
-    query: 'new',
-    locale: 'en-US'
-  },
-  headers: {
-    'x-rapidapi-key': key,
-    'x-rapidapi-host': host
-  }
-};
+// export const searchAirport = {
+//   method: 'GET',
+//   url: 'https://sky-scrapper.p.rapidapi.com/api/v1/flights/searchAirport',
+//   params: {
+//     query: 'new',
+//     locale: 'en-US'
+//   },
+//   headers: {
+//     'x-rapidapi-key': key,
+//     'x-rapidapi-host': host
+//   }
+// };
 
-try {
-	const response = await axios.request(options);
-	console.log(response.data);
-} catch (error) {
-	console.error(error);
-}
+// try {
+// 	const response = await axios.request(options);
+// 	console.log(response.data);
+// } catch (error) {
+// 	console.error(error);
+// }
 
 export const fetchFlights = async ({ originSkyId, destinationSkyId, originEntityId, destinationEntityId, departDate }) => {
   const options = {
@@ -48,8 +48,8 @@ export const fetchFlights = async ({ originSkyId, destinationSkyId, originEntity
       date: departDate
     },
     headers: {
-      'x-rapidapi-key': '53638e777amsh1a3e4590974a616p16247djsnbc3ac71109a7',
-      'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com',
+      'x-rapidapi-key': 'ef85cbd4b5mshaac28f7d86fa3dep1efd0cjsnbab025636679',
+    'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com'
     }
   };
 

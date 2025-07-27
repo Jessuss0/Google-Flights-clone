@@ -48,7 +48,7 @@ const AirportAutocomplete = ({ onSelectAirport }) => {
   }, [query]);
 
   const handleSelect = (airport) => {
-    skipNextFetch.current = true; // ⛔ evitar que query dispare fetch
+    skipNextFetch.current = true;
     setQuery(`${airport?.navigation?.localizedName} (${airport?.entityId})`);
     setSuggestions([]);
     onSelectAirport(airport);

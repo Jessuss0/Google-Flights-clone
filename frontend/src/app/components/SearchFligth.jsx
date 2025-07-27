@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react";
 import AirportAutocomplete from "./AirportAutocomplete";
-import { fetchFlights } from "../services/api";
 
 const FlightSearchForm = ({ onSearch }) => {
   const [origin, setOrigin] = useState(null);
@@ -34,14 +33,6 @@ onSearch({originSkyId: "LOND",
   destinationEntityId: "27537542",
   departDate: "2025-08-01"
   });
-
-// await fetchFlights({originSkyId: "LOND",
-//   destinationSkyId: "NYCA",
-//   originEntityId: "27544008",
-//   destinationEntityId: "27537542",
-//   departDate: "2025-08-01"
-//   }).then((data) => {
-//       console.log("Vuelos encontrados:", data);})
     }
 
   return (

@@ -2,16 +2,11 @@
 import React from 'react';
 
 const FlightCard = ({ flight }) => {
-  const {
-    precio,
-    moneda,
-    salida,
-    llegada,
-    aerolinea,
-    duracion
-  } = flight;
+  const { precio, moneda, salida, llegada, duracion, aerolinea } = flight;
 
   const formatHora = (isoString) => new Date(isoString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  console.log("Flight data:", flight);
 
   return (
     <div className="bg-white shadow-md rounded-xl p-4 flex items-center justify-between gap-10 w-[1000px]">
